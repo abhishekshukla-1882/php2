@@ -105,11 +105,14 @@ function calculate_area($length,$breadth){
 
 
 if(isset($_FILES["fileToUpload"])){
-
+    $uploadOk =1;
     print_r($_FILES);
-
+    if ($_FILES["fileToUpload"]["size"] > 200000) {
+        echo "Sorry, your file is too large.";
+        $uploadOk = 0;
+      }
   
-    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"],"uploads/".$_FILES["fileToUpload"]["name"])) {
+    if ($uploadOk==1 && move_uploaded_file($_FILES["fileToUpload"]["tmp_name"],"uploads/".$_FILES["fileToUpload"]["name"])) {
         echo "The file has been uploaded.";
     } else {
         echo "Sorry, there was an error uploading your file.";
