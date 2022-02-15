@@ -102,6 +102,21 @@ function calculate_area($length,$breadth){
       return $length * $breadth;
     
 }}
+
+
+if(isset($_FILES["fileToUpload"])){
+
+    print_r($_FILES);
+
+  
+    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"],"uploads/".$_FILES["fileToUpload"]["name"])) {
+        echo "The file has been uploaded.";
+    } else {
+        echo "Sorry, there was an error uploading your file.";
+    }
+}
+
+
 ?>
 
 <body>
@@ -169,5 +184,12 @@ function calculate_area($length,$breadth){
         echo '<br> converted ' . $converted_time; ?>
 		</div>
 	</div>
+
+    <form action="" method="post" enctype="multipart/form-data">
+        Select image to upload:
+        <input type="file" name="fileToUpload" id="fileToUpload"><br>
+        <input type="submit" value="Upload Image" name="submit">
+    </form>
+
 </body>
 </html>
