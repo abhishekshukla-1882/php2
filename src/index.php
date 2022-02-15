@@ -64,6 +64,26 @@ if (is_numeric($first_num) && is_numeric($second_num)) {
             $result = $first_num / $second_num;
     }
 }
+if (isset($_POST['Convert'])) {
+
+  
+
+    $htm = $_POST['timer'];
+    $con = $_POST['time'];
+    // echo $htm;
+    $converted_time = '';
+    if($con == 'htm'){
+        $converted_time =' hours to Minute '. $htm * 60 ;
+
+    }
+    else{
+        $converted_time = ' hours to second '.$htm * 60 * 60 ;
+    }
+    // return $converted_time;
+    // echo $converted_time;
+}
+
+
 
 if (isset($_POST['calculate'])) {
   
@@ -98,7 +118,7 @@ function calculate_area($length,$breadth){
 		</div>
 	</div>
   <div id="page-cal">
-		<h1>Php - Calculate Electricity Bill</h1>
+		<h1>Php - Calculator </h1>
 
 		<form action="" method="post" id="cal">
             Firrst val : 	<input type="number" name="val" id="val" placeholder="Please enter no." /><br><br>
@@ -118,7 +138,7 @@ function calculate_area($length,$breadth){
 <!--                             Area of recctangle             -->
 
 <div id="area-cal">
-		<h1>Php - Calculate Electricity Bill</h1>
+		<h1>Php - Calculate Area </h1>
 
 		<form action="" method="post" id="area-cal">
             length of ractangle  : 	<input type="number" name="len" id="len" placeholder="Please enter no." /><br><br>
@@ -132,6 +152,22 @@ function calculate_area($length,$breadth){
         echo '<br />' . $result_a; ?>
 		</div>
 	</div>
+<!--                      conversion of time                   -->
+<div id="area-cal">
+		<h1>Php - Time Conversion</h1>
 
+		<form action="" method="post" id="area-cal">
+            Time  : 	<input type="number" name="timer" id="len" placeholder="Please enter no." /><br><br>
+            hour to minute : 	<input type="radio" name="time" value="htm" /><br><br>
+            hour to second  : <input type="radio" name="time" value="hts" /><br><br>
+            <input type="submit" name="Convert"  />
+		</form>
+
+		<div>
+		    <?php
+        // echo $sub;
+        echo '<br> converted ' . $converted_time; ?>
+		</div>
+	</div>
 </body>
 </html>
