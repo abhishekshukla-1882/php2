@@ -44,82 +44,6 @@ function calculate_bill($units) {
     return number_format((float)$bill, 2, '.', '');
 }
 
-
-$first_num = $_POST['val'];
-$second_num = $_POST['val1'];
-$operator = $_POST['operator'];
-$result = '';
-if (is_numeric($first_num) && is_numeric($second_num)) {
-    switch ($operator) {
-        case "Add":
-           $result = $first_num + $second_num;
-            break;
-        case "Subtract":
-           $result = $first_num - $second_num;
-            break;
-        case "Multiply":
-            $result = $first_num * $second_num;
-            break;
-        case "Divide":
-            $result = $first_num / $second_num;
-    }
-}
-if (isset($_POST['Convert'])) {
-
-  
-
-    $htm = $_POST['timer'];
-    $con = $_POST['time'];
-    // echo $htm;
-    $converted_time = '';
-    if($con == 'htm'){
-        $converted_time =' hours to Minute '. $htm * 60 ;
-
-    }
-    else{
-        $converted_time = ' hours to second '.$htm * 60 * 60 ;
-    }
-    // return $converted_time;
-    // echo $converted_time;
-}
-
-
-
-if (isset($_POST['calculate'])) {
-  
-  $length = $_POST['len'];
-  $breadth = $_POST['breadth'];
-  $result_a = calculate_area($length,$breadth);
-
-
-  }
-
-
-// $operator = $_POST['operator'];
-$result_area = '';
-function calculate_area($length,$breadth){
-  if (is_numeric($length) && is_numeric($breadth)) {
-      return $length * $breadth;
-    
-}}
-
-
-if(isset($_FILES["fileToUpload"])){
-    $uploadOk =1;
-    print_r($_FILES);
-    if ($_FILES["fileToUpload"]["size"] > 200000) {
-        echo "Sorry, your file is too large.";
-        $uploadOk = 0;
-      }
-  
-    if ($uploadOk==1 && move_uploaded_file($_FILES["fileToUpload"]["tmp_name"],"uploads/".$_FILES["fileToUpload"]["name"])) {
-        echo "The file has been uploaded.";
-    } else {
-        echo "Sorry, there was an error uploading your file.";
-    }
-}
-
-
 ?>
 
 <body>
@@ -135,64 +59,13 @@ if(isset($_FILES["fileToUpload"])){
 		    <?php echo '<br />' . $result_str; ?>
 		</div>
 	</div>
-  <div id="page-cal">
-		<h1>Php - Calculator </h1>
-
-		<form action="" method="post" id="cal">
-            Firrst val : 	<input type="number" name="val" id="val" placeholder="Please enter no." /><br><br>
-            second val : <input type="number" name="val1" id="val1" placeholder="Please enter no." /><br><br>
-            <input type="submit" name="operator" value="Add" />&nbsp;&nbsp;&nbsp;
-            <input type="submit" name="operator" value="Subtract" />&nbsp;&nbsp;&nbsp;
-            <input type="submit" name="operator" value="Multiply" />&nbsp;&nbsp;&nbsp;
-            <input type="submit" name="operator" value="Divide" />
-		</form>
-
-		<div>
-		    <?php
-        // echo $sub;
-        echo '<br />' . $result; ?>
-		</div>
-	</div>
+  
 <!--                             Area of recctangle             -->
 
-<div id="area-cal">
-		<h1>Php - Calculate Area </h1>
-
-		<form action="" method="post" id="area-cal">
-            length of ractangle  : 	<input type="number" name="len" id="len" placeholder="Please enter no." /><br><br>
-            breadth of ractangle  : <input type="number" name="breadth" id="bredth" placeholder="Please enter no." /><br><br>
-            <input type="submit" name="calculate" value="calculate" />
-		</form>
-
-		<div>
-		    <?php
-        // echo $sub;
-        echo '<br />' . $result_a; ?>
-		</div>
-	</div>
 <!--                      conversion of time                   -->
-<div id="area-cal">
-		<h1>Php - Time Conversion</h1>
 
-		<form action="" method="post" id="area-cal">
-            Time  : 	<input type="number" name="timer" id="len" placeholder="Please enter no." /><br><br>
-            hour to minute : 	<input type="radio" name="time" value="htm" /><br><br>
-            hour to second  : <input type="radio" name="time" value="hts" /><br><br>
-            <input type="submit" name="Convert"  />
-		</form>
 
-		<div>
-		    <?php
-        // echo $sub;
-        echo '<br> converted ' . $converted_time; ?>
-		</div>
-	</div>
-
-    <form action="" method="post" enctype="multipart/form-data">
-        Select image to upload:
-        <input type="file" name="fileToUpload" id="fileToUpload"><br>
-        <input type="submit" value="Upload Image" name="submit">
-    </form>
+    
 
 </body>
 </html>
