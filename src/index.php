@@ -17,33 +17,53 @@ if (isset($_POST['unit-submit'])) {
  * To calculate electricity bill as per unit cost
  */
 function calculate_bill($units) {
-    // $unit_cost_first = 3.50;
-    // $unit_cost_second = 4.00;
-    // $unit_cost_third = 5.20;
-    // $unit_cost_fourth = 6.50;
-
-    // if($units <= 50) {
-    //     $bill = $units * $unit_cost_first;
-    // }
-    // else if($units > 50 && $units <= 100) {
-    //     $temp = 50 * $unit_cost_first;
-    //     $remaining_units = $units - 50;
-    //     $bill = $temp + ($remaining_units * $unit_cost_second);
-    // }
-    // else if($units > 100 && $units <= 200) {
-    //     $temp = (50 * 3.5) + (100 * $unit_cost_second);
-    //     $remaining_units = $units - 150;
-    //     $bill = $temp + ($remaining_units * $unit_cost_third);
-    // }
-    // else {
-    //     $temp = (50 * 3.5) + (100 * $unit_cost_second) + (100 * $unit_cost_third);
-    //     $remaining_units = $units - 250;
-    //     $bill = $temp + ($remaining_units * $unit_cost_fourth);
-    // }
-    // return number_format((float)$bill, 2, '.', '');
     return "units $ ".($units * 8);
 }
 
+
+$first_num = $_POST['val'];
+$second_num = $_POST['val1'];
+$operator = $_POST['operator'];
+$result = '';
+if (is_numeric($first_num) && is_numeric($second_num)) {
+    switch ($operator) {
+        case "Add":
+           $result = $first_num + $second_num;
+            break;
+        case "Subtract":
+           $result = $first_num - $second_num;
+            break;
+        case "Multiply":
+            $result = $first_num * $second_num;
+            break;
+        case "Divide":
+            $result = $first_num / $second_num;
+    }
+}
+// if (isset($_POST['cal-submit'])) {
+//   $calcu = $_POST['val'];
+//   $calcu1 = $_POST['val1'];
+//   $sub = $_POST('operator');
+//   echo $sub;
+//   if (!empty($units)) {
+//       $result1 = calculate($calcu,$calcu1,$sub);
+//       // $result_str = 'Total amount of ' . $units . ' - ' . $result;
+//   }
+// }
+// function calculate($calcu,$calcu1,$sub){
+//   switch($sub){
+//     case '+':
+//       return $calcu1 + $calcu;
+//     case '-':
+//       return $calcu - $calcu1;
+//     case '/':
+//       return $calcu1 / $calcu;
+//     case '*':
+//       return $calcu1 * $calcu;
+        
+//   }
+
+// }
 ?>
 
 <body>
@@ -57,6 +77,24 @@ function calculate_bill($units) {
 
 		<div>
 		    <?php echo '<br />' . $result_str; ?>
+		</div>
+	</div>
+  <div id="page-cal">
+		<h1>Php - Calculate Electricity Bill</h1>
+
+		<form action="" method="post" id="cal">
+            Firrst val : 	<input type="number" name="val" id="val" placeholder="Please enter no." /><br><br>
+            second val : <input type="number" name="val1" id="val1" placeholder="Please enter no." /><br><br>
+              <input type="submit" name="operator" value="Add" />&nbsp;&nbsp;&nbsp;
+            <input type="submit" name="operator" value="Subtract" />&nbsp;&nbsp;&nbsp;
+            <input type="submit" name="operator" value="Multiply" />&nbsp;&nbsp;&nbsp;
+            <input type="submit" name="operator" value="Divide" />
+		</form>
+
+		<div>
+		    <?php
+        echo $sub;
+        echo '<br />' . $result; ?>
 		</div>
 	</div>
 </body>
