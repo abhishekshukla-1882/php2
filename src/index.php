@@ -1,71 +1,57 @@
-<!DOCTYPE html>
-
-<head>
-	<title>PHP - Calculate Electricity Bill</title>
-</head>
-
 <?php
-$result_str = $result = '';
-if (isset($_POST['unit-submit'])) {
-    $units = $_POST['units'];
-    if (!empty($units)) {
-        $result = calculate_bill($units);
-        $result_str = 'Total amount of ' . $units . ' - ' . $result;
-    }
-}
-/**
- * To calculate electricity bill as per unit cost
- */
-function calculate_bill($units) {
-    // return "units $ ".($units * 8);
-    $unit_cost_first = 3.50;
-    $unit_cost_second = 4.00;
-    $unit_cost_third = 5.20;
-    $unit_cost_fourth = 6.50;
 
-    if($units <= 50) {
-        $bill = $units * $unit_cost_first;
-    }
-    else if($units > 50 && $units <= 100) {
-        $temp = 50 * $unit_cost_first;
-        $remaining_units = $units - 50;
-        $bill = $temp + ($remaining_units * $unit_cost_second);
-    }
-    else if($units > 100 && $units <= 200) {
-        $temp = (50 * 3.5) + (100 * $unit_cost_second);
-        $remaining_units = $units - 150;
-        $bill = $temp + ($remaining_units * $unit_cost_third);
-    }
-    else {
-        $temp = (50 * 3.5) + (100 * $unit_cost_second) + (100 * $unit_cost_third);
-        $remaining_units = $units - 250;
-        $bill = $temp + ($remaining_units * $unit_cost_fourth);
-    }
-    return number_format((float)$bill, 2, '.', '');
-}
-
-?>
-
-<body>
-	<div id="page-wrap">
-		<h1>Php - Calculate Electricity Bill</h1>
-
-		<form action="" method="post" id="quiz-form">
-            	<input type="number" name="units" id="units" placeholder="Please enter no. of Units" />
-            	<input type="submit" name="unit-submit" id="unit-submit" value="Submit" />
-		</form>
-
-		<div>
-		    <?php echo '<br />' . $result_str; ?>
-		</div>
-	</div>
-  
-<!--                             Area of recctangle             -->
-
-<!--                      conversion of time                   -->
-
-
-    
-
-</body>
+if(isset($_GET)){
+    $unit = $_GET['unit'];
+  }
+  if($unit <= 50){
+     $total = $unit * 3.50;
+  }
+  elseif($unit>50 and $unit <=150){
+     $total = (($unit-50)*4.00) + (50*3.50);
+  }
+  elseif($unit>150 and $unit <=250){ 
+   $unit = $unit - 50;
+   $total = 50*3.50;
+   $unit= $unit -100 ;
+   $total += (100 *4.00) + ($unit * 5.20);   
+ }
+ else{
+   $unit = $unit - 50;
+   $total = 50*3.50;
+   $unit= $unit -100 ;
+   $total += (100 *4.00);
+   $unit = $unit -100;
+   $total += (100 *5.20) + ($unit * 6.50); 
+ 
+ }
+ 
+ ?>
+ <!DOCTYPE html>
+ <html lang="en">
+ 
+ <head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="style.css">
+   <title>PHP-Forms</title>
+ </head>
+ 
+ <body>
+   <div class="wrapper">
+     <h3> Program to calculate Electricity bill </h3>
+     <form method="GET" action="" >
+       <div class="user">
+         <dv class="col">
+           <label for="Name" class="row">Unit</label>
+         </dv>
+         <div class="col">
+           <input type="text" id="unit" name ="unit" required>
+         </div>
+       </div>
+       <input type="submit" value="Calculate" id="submit" name="submit">
+     </form>
+     <H2>Total bill : Rs <?php echo $total?></h2>
+   </div>
+ </body>
 </html>
